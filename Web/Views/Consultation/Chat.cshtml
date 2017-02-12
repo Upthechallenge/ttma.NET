@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+<section id="job">
+    <div class="job-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+
+                    <html>
+                   
+                    <body><h2>TTMA Chat Room</h2>
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+
+
+    <textarea id = "displayname" style="width: 113px; height: 69px;" class="form-control text-box single-line" >@User.Identity.GetUserName()</textarea>
+
+}
+
+                        <br /><br />
+
+                            <textarea id="message" rows="10" cols="20"  class="form-control text-box single-line" ></textarea> <br />
+                            <input type="button" id="sendmessage" value="Envoyer" class="btn btn-default"/><br />
+
+
+                            <ul id="discussion"></ul>
+
+
+                        <!--Script references. -->
+                        <!--Reference the jQuery library. -->
+
+
+                        <script src="~/Scripts/jquery-1.6.4.min.js"></script>
+                        <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+                        <script src="~/signalr/hubs"></script>
+
+
+
+                        <!--Add script to update the page and send messages.-->
+                        <script type="text/javascript">
+                            $(function () {
+    // Declare a proxy to reference the hub.
+    var chat = $.connection.chatHub;
+    // Create a function that the hub can call to broadcast messages.
+    chat.client.broadcastMessage = function (name, message) {
+        // Html encode display name and message.
+        var encodedName = $('<div />').text(name).html();
+        var encodedMsg = $('<div />').text(message).html();
+                                    // Add the message to the page.
+                                    $('#discussion').append('<li><strong>' + encodedName
+                                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li><br>');
+
+
+    };
+                                // Get the user name and store it to prepend to messages.
+                                // $('#displayname').val(prompt('Votre nom :', ''));
+
+
+                                // Set initial focus to message input box.
+                                $('#message').focus();
+                                // Start the connection.
+                                $.connection.hub.start().done(function () {
+                                    $('#sendmessage').click(function () {
+            // Call the Send method on the hub.
+            chat.server.send($('#displayname').val(),
+                                       $('#message').val());
+                                        // Clear text box and reset focus for next comment.
+                                        $('#message').val('').focus();
+        });
+    });
+});
+
+                            function imageHandler(e2) {
+    var store = document.getElementById('imgstore');
+    store.innerHTML = '<img src="' + e2.target.result + '">';
+}
+
+function loadimage(e1) {
+    var filename = e1.target.files[0];
+    var fr = new FileReader();
+    fr.onload = imageHandler;
+    fr.readAsDataURL(filename);
+}
+function readerHandler(e2) {
+    var store = document.getElementById('storage');
+    store.innerHTML = e2.target.result;
+}
+
+function readfile(e1) {
+    var fileobj = e1.target.files[0];
+    var fr = new FileReader();
+    fr.onload = readerHandler;
+    fr.readAsText(fileobj);
+}
+
+window.onload = function () {
+
+    var y = document.getElementById("getimage");
+    y.addEventListener('change', loadimage, false);
+    var x = document.getElementById("filebrowsed");
+    x.addEventListener('change', readfile, false);
+}
+
+                        </script>
+                    </body>
+                </html>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

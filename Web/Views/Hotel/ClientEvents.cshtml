@@ -1,0 +1,133 @@
+﻿
+@using Jmelosegui.Mvc.GoogleMap
+@model dynamic
+@{
+    ViewBag.Title = "Marker Client Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .event {
+        transition: background-color 0.5s ease-out;
+        padding-bottom: 2px;
+    }
+
+        .event.active {
+            background-color: #99CCFF;
+        }
+
+        .event.inactive {
+            background-color: transparent;
+        }
+</style>
+<div id="main" class="row">
+    <div class="col-md-10">
+        @{
+            Html.GoogleMap()
+                .Name("map")
+                .Height(420)
+                .Markers(m =>
+                {
+                m.Add().Id("UniqueId-1")
+                    .Title("Hello Marker Client Events!")
+                    .Longitude(-82)
+                    .Latitude(23)
+                    .Clickable((bool)ViewData["clickable"])
+                    .Draggable((bool)ViewData["draggable"])
+                    .Window(window => window.Add()
+                        .MaxWidth(200)
+                        .ZIndex(3)
+                        .DisableAutoPan(false)
+                        .Content(
+                        
+                        @<text>
+                            <div>
+                                <h5>Hello Marker Client Events!</h5>
+                                <p>Drag me over the map</p>
+                            </div>
+                        </text>
+)
+                        );
+                })
+                        .MarkerEvents(events =>
+                            events.OnMarkerClick("highlightEvent")
+                                .OnMarkerDoubleClick("highlightEvent")
+                                .OnMarkerDragStart("highlightEvent")
+                                .OnMarkerDrag("highlightEvent")
+                                .OnMarkerDragEnd("highlightEvent")
+                                .OnMarkerIconChanged("highlightEvent")
+                                .OnMarkerMouseDown("highlightEvent")
+                                .OnMarkerMouseOut("highlightEvent")
+                                .OnMarkerMouseOver("highlightEvent")
+                                .OnMarkerMouseUp("highlightEvent")
+                                .OnMarkerPositionChanged("highlightEvent")
+                                .OnMarkerRightClick("highlightEvent")
+                        ).Render();
+        }
+    </div>
+    <div id="events" class="col-md-2">
+    </div>
+</div>
+<form class="form-horizontal" role="form">
+    <h4> Marker Settings</h4>
+    <div class="form-group">
+        <div class="col-sm-5 col-lg-offset-1">
+            <div class="checkbox">
+                <label>@Html.CheckBox("clickable") Clickable</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-5 col-lg-offset-1">
+            <div class="checkbox">
+                <label>@Html.CheckBox("draggable") Draggable</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Apply</button>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var events = [
+                'animation_changed', 'click', 'clickable_changed', 'cursor_changed', 'dblclick', 'dragstart',
+                    'drag', 'dragend', 'flat_changed', 'icon_changed', 'mousedown', 'mouseout', 'mouseover', 'mouseup',
+                    'position_changed', 'rightclick', 'shape_changed', 'title_changed', 'visible_changed', 'zindex_changed'
+            ];
+            // Dynamically create the table of events from the defined hashmap
+            function populateTable() {
+                var eventsTable = document.getElementById('events');
+                var content = '';
+                for (var i = 0; i < events.length; i++) {
+                    content += '<div class="event" id="' + events[i] + '">' + events[i] + '</div>';
+                }
+                eventsTable.innerHTML = content;
+            }
+            populateTable();
+        });
+
+        
+        function highlightEvent(args) {
+            var timeout;
+            var eventRow = document.getElementById(args.eventName);
+            eventRow.className = 'event active';
+            clearTimeout(timeout);
+            setTimeout(function() {
+                eventRow.className = 'event inactive';
+            }, 1000);
+            if (args.eventName === 'click') {
+                alert("You clicked the marker with id =" + args.id);
+            }
+            if (args.eventName === 'dragend') {
+                args.marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () {
+                    args.marker.setAnimation(null);
+                    
+                }, 1000);
+            }
+        }
+    </script>
+}

@@ -1,0 +1,277 @@
+﻿@model domain.Entities.demande
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+<body onload="getLocation()">
+    <section class="navs">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand logo" href="#">
+                        <span><i class="fa fa-stethoscope"></i></span>
+                        T.T.M.A
+                    </a>
+                </div>
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        //  @Html.AntiForgeryToken()
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li>@Html.ActionLink("Doctor", "Index", "Doctor")</li>
+                                <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                                <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                            </ul>
+                        </li>
+
+                        <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                        <li>@Html.ActionLink("Insurance", "Insurance", "Insurance")</li>
+
+                        <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                        <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                                <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                            </ul>
+                        </li>
+
+
+                        <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+                        <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                    </ul>
+                </div><!-- navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </section>
+    <section id="starting">
+        <div class="starting-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="team-button">
+                        <div class="col-md-12">
+                            <h1 class="main-title wow animated fadeInLeft">Transport</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="job">
+        <div class="job-wrapper">
+            <div class="container">
+                <div class="row">
+                    @*<h4>demande</h4>*@
+                    <hr />
+                    <dl class="dl-horizontal">
+                        @*<input id="Button1" type="button" value="button" />*@
+
+                        <dt style="color: #2F4F4F;">
+                            @Html.DisplayName("Destination :")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.destination)
+                        </dd>
+
+                        <dt style="color: #2F4F4F;">
+                            @Html.DisplayName("Email :")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
+
+                        <dt style="color: #2F4F4F;">
+                            @Html.DisplayName("Means of Transport :")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.moyenTransport)
+                        </dd>
+
+                        <dt style="color: #2F4F4F;">
+                            @Html.DisplayName("Last Name :")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.name)
+                        </dd>
+
+                        <dt style="color: #2F4F4F;">
+                            @Html.DisplayName("First Name :")
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.prenom)
+                        </dd>
+
+                    </dl>
+                </div>
+
+
+                <p id="demo">send mail to help us locate your position</p>
+
+                @*<button onclick="getLocation()">Get your position</button>*@
+
+                <div id="mapholder"></div>
+
+                <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+                <script>
+                    var x = document.getElementById("demo");
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition, showError);
+                        } else {
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                        }
+                    }
+
+                    function showPosition(position) {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+
+                        document.getElementById("momo").value = lat + "/" + lon;
+                        // alert(lat + "/" + lon);
+                        latlon = new google.maps.LatLng(lat, lon)
+                        mapholder = document.getElementById('mapholder')
+                        mapholder.style.height = '250px';
+                        mapholder.style.width = '500px';
+
+                        var myOptions = {
+                            center: latlon, zoom: 14,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            mapTypeControl: false,
+                            navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+                        }
+
+                        var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+                        var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+                        animation: google.maps.Animation.BOUNCE
+
+
+                        // Zoom to 9 when clicking on marker
+                        google.maps.event.addListener(marker, 'click', function () {
+                            map.setZoom(15);
+                            map.setCenter(marker.getPosition());
+                        });
+                    }
+
+                    function showError(error) {
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                x.innerHTML = "User denied the request for Geolocation."
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                x.innerHTML = "Location information is unavailable."
+                                break;
+                            case error.TIMEOUT:
+                                x.innerHTML = "The request to get user location timed out."
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                x.innerHTML = "An unknown error occurred."
+                                break;
+                        }
+                    }
+                </script>
+
+
+                <span id="localisation" name="aa"></span>
+                @*<input id="momo" onload="getLocation()" type="text" />*@
+
+
+          
+
+                @*mail*@
+                <fieldset>
+
+                    <form action="/NewSendMailer/mailuser" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="Dl8q0p3LhbmEOwmZN33XumofGTCGtH26TCsaT12UHEn5OLtYX_NrdAKXZFiW-TZ8SIO4Ax-JnA39cRd9p9wfMc6CY5gDsVnwmLzksDAZdFs1" />
+                        Form :  <input class="form-control text-box single-line" id="From" name="From" type="text" value= @Html.DisplayFor(model => model.email) /><br />
+                        <span class="field-validation-valid" data-valmsg-for="From" data-valmsg-replace="true"></span><br />
+                        To :<input class="form-control text-box single-line" id="To" name="To" type="text" value="ttma.esprit@gmail.com" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="To" data-valmsg-replace="true"></span><br />
+                        Subject: <input class="form-control text-box single-line" id="Subject" name="Subject" type="text" value="" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="Subject" data-valmsg-replace="true"></span><br />
+
+                        Message :   <input class="form-control text-box single-line"  onload="getLocation()" id="momo" name="Body" type="text"  /><br />
+                        <span class="field-validation-valid" data-valmsg-for="Body" data-valmsg-replace="true"></span><br />
+
+
+                        <input type="submit" value="Send" class="btn btn-default" />
+
+
+                    </form>
+
+
+        @*end mail*@
+
+        </div>  <!-- end of row -->
+        </div>  <!-- end of container -->
+    </section>
+
+
+    <section id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copy-right-text text-center">
+                        &copy; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+

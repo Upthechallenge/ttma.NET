@@ -1,0 +1,251 @@
+﻿@model IEnumerable<domain.Entities.demandeconsultationenligne>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Our doctors", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Index", "InsuranceOffer")</li>
+
+                    <li>@Html.ActionLink("Events", "Indexfront", "Event")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Hotels", "IndexFront", "Hotel")</li>
+
+                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+
+                    <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="starting">
+    <div class="starting-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="team-button">
+                    <div class="col-md-12">
+                        <h1 class="main-title wow animated fadeInLeft">Online Consultations</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <h2 class="sub-title wow animated flipInX" data-wow-delay="1s">Meet With Our Team</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateAppointement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.doctor_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.patient_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateAppointement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.doctor_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.patient_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<section id="job">
+    <div class="job-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2 style="text-align: right;">Want To Join Our Team ???</h2>
+                    <h4 style="text-align: right;">
+                        We are looking for qualified professionals who are passionate about their job. Send us your CV to the email address specified below
+                    </h4>
+                    <!--  form for job  -->
+                    <div class="form">
+
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope-o fa-fw"></i>
+                            </span>
+                            <input class="form-control" type="text" placeholder="ttma.esprit@gmail.com">
+                        </div>
+
+
+
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope-o fa-fw"></i>
+                            </span>
+                            <input class="form-control" type="text" placeholder="To">
+                        </div>
+
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-fw"></i>
+                            </span>
+                            <input class="form-control" type="text" placeholder="Subject">
+                        </div>
+
+                        <div class="input-group margin-bottom-sm">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user fa-fw"></i>
+                            </span>
+                            <input class="form-control" type="text" placeholder="Message">
+                        </div>
+
+
+
+                    </div>
+                    <button type="button" class="btn btn-primary send">Send</button>
+                    <!-- end of form -->
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="block-image background-scale">
+                        <img class="img-responsive center-block" src="assets/img/join.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="text-center contact">
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Google +" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Instagram" class="instagram"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Pinterest" class="pinterest"><i class="fa fa-pinterest"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Connect with Skype" class="skype"><i class="fa fa-skype"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; Copyright 2015</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="assets/js/wow.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+<script>
+    new WOW().init();
+</script>
+

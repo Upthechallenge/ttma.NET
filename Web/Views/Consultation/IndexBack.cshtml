@@ -1,0 +1,161 @@
+﻿@model IEnumerable<domain.Entities.demandeconsultationenligne>
+
+@{
+    ViewBag.Title = "IndexBack";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>IndexBack</h2>
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    TTMA Management:
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+
+
+                    <li>@Html.ActionLink("Home", "IndexBack", "Home")</li>
+                    <li>@Html.ActionLink("Staff", "Index", "InsuranceAgent")</li>
+                    <li>@Html.ActionLink("Doctors", "IndexBack", "Doctor")</li>
+                    <li>@Html.ActionLink("Consultations", "IndexBack", "Consultation")</li>
+                    <li>@Html.ActionLink("Offers", "IndexBack", "Offer")</li>
+                    <li>@Html.ActionLink("Events", "Index", "Event")</li>
+                    <li>@Html.ActionLink("Leave", "IndexBack", "conge")</li>
+                    <li>@Html.ActionLink("Time Table", "IndexBack", "Timetable")</li>
+                    <li>@Html.ActionLink("Hotels", "IndexBack", "Hotel")</li>
+                    <li>@Html.ActionLink("Insurance", "Indexbackoffice", "InsuranceOffer")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Transport", "IndexBack", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Demande tr", "IndexBack", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Front Home", "Create", "Conge")</li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="job">
+    <div class="job-wrapper" style="
+    height: 802px;
+">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @*ici le code*@
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.dateAppointement)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.doctor_name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.patient_Name)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateAppointement)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.doctor_name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.patient_Name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    @*fin code*@
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="block-image background-scale">
+                        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; TTMA Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿
+@using System.Web.Mvc.Html;
+
+@using Jmelosegui.Mvc.GoogleMap;
+@using System.Drawing;
+@{
+    ViewBag.Title = "Hotel and your positions";
+    Layout = "~/Views/Shared/Marker.cshtml";
+}
+
+@{ 
+    Html.GoogleMap()
+        .Name("map")
+        .Height(300)
+        .Center(c => c.UseCurrentPosition()
+
+
+                      )
+        .FitToMarkersBounds(true)
+
+
+
+
+        .Markers(m =>
+        {
+            m.Add().Title("Hello World!")
+          .Latitude(@ViewBag.lat)
+          .Longitude(@ViewBag.lon)
+          ;
+            m.Add().Title("Current Position!")
+                    .Icon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png")
+                    
+                    ; 
+
+
+
+
+        }).Render();
+
+
+
+}
+
+
+
+
+
+            

@@ -1,0 +1,143 @@
+﻿@model IEnumerable<domain.Entities.doctor>
+
+@{
+    ViewBag.Title = "Statisticsdoctors";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>Statisticsdoctors</h2>
+
+
+<h2>Statistics doctors</h2>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['ADHD @ViewData["ADHD"] ', @ViewData["ADHD"]],
+          ['Neuro @ViewData["Neurophysicology"] ', @ViewData["Neurophysicology"]],
+           ['Eating @ViewData["Eating_disorder"]', @ViewData["Eating_disorder"]],
+           ['Trauma @ViewData["Trauma"] ', @ViewData["Trauma"]],
+           ['Phobias @ViewData["Phobias"] ', @ViewData["Phobias"]],
+           ['Sexology @ViewData["Sexology"] ', @ViewData["Sexology"]],
+
+        ]);
+
+        // Set chart options
+        var options = {
+            backgroundColor: 'transparent',
+            'is3D': 'true',
+            'tooltip.textStyle': { backgroundColor: 'transparent' },
+            'width': 400,
+            'height': 300
+        }
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+    </script>
+</head>
+<div style="margin-bottom:500px;" class="content container-fluid">
+    <div class="row-fluid" id="kbira" height="auto" width:"100%">
+
+        <div class="span12" float="center">
+
+            <h2>
+                Specialty analysis:
+            </h2>
+            <h2 class="page-title"></h2>
+        </div>
+        <div id="ommhom" margin-right="200%">
+
+            <div class="widget" style="width:100%;float:left;margin:0%">
+
+
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All ADHD Specialists :  you have @ViewData["ADHD"] Specialists
+                </h4>
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All Neurophysicology Specialists :  you have @ViewData["Neurophysicology"] Specialists
+                </h4>
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All Phobias Specialists :  you have @ViewData["Eating_disorder"] Specialists
+                </h4>
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All Trauma Specialists :  you have Integer(@ViewData["Trauma"]) Specialists
+                </h4>
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All Eating_disorder Specialists :  you have @ViewData["Phobias"] Specialists
+                </h4>
+                <h4>
+                    <i class="icon-calendar"></i>
+                    All Sexology Specialists :  you have @ViewData["Sexology"] Specialists
+                </h4>
+
+                <div id='external-events' style="width:100%" float="left">
+
+                    <div id="chart_div" style="float:center"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="widget" style="width:100%;float:left;margin-top:20px">
+
+            <div id='external-events' style="width:100%;" float="left">
+                <div class='external-event' style="background-color: #20b2aa;">
+                    <i class=" eicon-clock"></i>
+                    ADHD : @ViewData["ADHD"]
+                </div>
+                <div class='external-event' style="background-color: #20b2aa;">
+                    <i class=" eicon-clock"></i>
+                    Neurophysicology : @ViewData["Neurophysicology"]
+                </div>
+                <div class='external-event' style="background-color: #8cbf26;">
+                    <i class="icon-plus"></i>
+                    Eating_disorder : @ViewData["Eating_disorder"]
+                </div>
+                <div class='external-event' style="background-color: #e5603b;">
+                    <i class="icon-minus"></i>
+                    Trauma : @ViewData["Trauma"]
+                </div>
+                <div class='external-event' style="background-color: #e5603b;">
+                    <i class="icon-minus"></i>
+                    Phobias : @ViewData["Phobias"]
+                </div>
+                <div class='external-event' style="background-color: #e5603b;">
+                    <i class="icon-minus"></i>
+                    Sexology : @ViewData["Sexology"]
+                </div>
+                <div>
+                    <hr />
+                </div>
+                <div class='external-event' style="background-color: #7a378b;">
+                    <i class=" icon-arrow-right"></i>
+                    Workload Points: @ViewData["Sexology"]
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

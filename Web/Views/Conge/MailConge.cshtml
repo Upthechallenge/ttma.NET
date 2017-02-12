@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "MailConge";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    TTMA Management
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "", "", routeValues: null, htmlAttributes: new { title = "" })
+                        </li>
+
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>@Html.ActionLink("Home", "IndexBack", "Home")</li>
+                    <li>@Html.ActionLink("Staff", "IndexBack", "Staff")</li>
+                    <li>@Html.ActionLink("Doctors", "IndexBack", "Doctor")</li>
+                    <li>@Html.ActionLink("Consultations", "IndexBack", "Consultation")</li>
+                    <li>@Html.ActionLink("Offers", "IndexBack", "Offer")</li>
+                    <li>@Html.ActionLink("Events", "IndexBack", "Event")</li>
+                    <li>@Html.ActionLink("Leave", "IndexBack", "conge")</li>
+                    <li>@Html.ActionLink("Time Table", "IndexBack", "Timetable")</li>
+                    <li>@Html.ActionLink("Hotels", "IndexBack", "Hotel")</li>
+                    <li>@Html.ActionLink("Insurance", "IndexBack", "Insurance")</li>
+                    <li>@Html.ActionLink("Front Home", "Create", "Conge")</li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="job">
+    <div class="job-wrapper" style="
+    height: 802px;
+">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @*ici le code*@
+
+                    <form action="/Conge/MailConge" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="Dl8q0p3LhbmEOwmZN33XumofGTCGtH26TCsaT12UHEn5OLtYX_NrdAKXZFiW-TZ8SIO4Ax-JnA39cRd9p9wfMc6CY5gDsVnwmLzksDAZdFs1" />
+                        Form :  <input class="form-control text-box single-line" id="From" name="From" type="text" value="ttma.esprit@gmail.com" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="From" data-valmsg-replace="true"></span><br />
+                        To :<input class="form-control text-box single-line" id="To" name="To" type="text" value="" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="To" data-valmsg-replace="true"></span><br />
+                        Subject: <input class="form-control text-box single-line" id="Subject" name="Subject" type="text" value="" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="Subject" data-valmsg-replace="true"></span><br />
+
+                        Message :   <input class="form-control text-box single-line" id="Body" name="Body" type="text" value=" Bonjour votre demande de conge a eté validé" /><br />
+                        <span class="field-validation-valid" data-valmsg-for="Body" data-valmsg-replace="true"></span><br />
+
+
+                        <input type="submit" value="Send" class="btn btn-default" />
+
+
+                    </form>

@@ -1,0 +1,81 @@
+﻿@model domain.Entities.operation
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>operation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_offre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_offre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.doctorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.doctorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.medicCenterNAme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.medicCenterNAme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price_Operation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price_Operation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_Operation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_Operation)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<a href="@Url.Action("PaymentWithPaypal", "Paypal")" class="dept-details-butt">Pay Payment With Paypal</a>
+@Html.ActionLink("Pay Direct With Credit Card", "PaymentWithCreditCard", "Paypal")
+@Html.ActionLink("Pay with Paypal Account", "PaymentWithPaypal", "Paypal")
+

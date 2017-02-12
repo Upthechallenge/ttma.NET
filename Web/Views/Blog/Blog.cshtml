@@ -1,0 +1,332 @@
+﻿
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>Blog</h2>
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Our doctors", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Index", "InsuranceOffer")</li>
+
+                    <li>@Html.ActionLink("Events", "Indexfront", "Event")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Hotels", "IndexFront", "Hotel")</li>
+
+                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+
+                    <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section class="blog-title text-center">
+    <div class="blog-wrapper">
+        <div class="container">
+            <div class="row">
+                <h1 class="headline">Our Blog</h1>
+            </div>
+            <div class="row">
+                <div class="sub-headline">
+                    <p>Full of important information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog-content">
+    <div class="container">
+        <div class="row">
+            <main class="blog1col col-md-9">
+                <div class="archive">
+                    <article class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@Url.Content("~/Content/template/")img/a3.jpg" class="img-responsive center-block img-padder" alt="Medical Theme Health and Care">
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <h4>
+                                <a href="#">
+                                    Medical Tourism in Tunisia
+                                </a>
+                            </h4>
+                            <ul class="list-inline info">
+
+                                <li><i class="fa fa-calendar"></i>@DateTime.Today.Date</li>
+                                <li><i class="fa fa-tag"></i> <a href="#">News</a></li>
+
+                            </ul>
+
+                            <p>
+                                Medical tourism is a new world tendency in full growth, with licence has million people to carry out their dream that to transform their image completely, to profit from a better quality of care at an affordable price, to avoid waiting and to benefit from an atmosphere relaxed within a pleasant framework and in any discretion.
+
+                            </p>
+
+                            <div class="fb-comments" data-href="http://localhost:53656/Blog/Blog" data-numposts="10"></div>
+                        </div>
+
+                    </article>
+
+                    <article class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@Url.Content("~/Content/template/")img/blog2.jpg" class="img-responsive center-block img-padder" alt="Medical Theme Health and Care">
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <h4>
+                                <a href="#">
+                                    Surgery of The Knobs
+                                </a>
+                            </h4>
+                            <ul class="list-inline info">
+
+                                <li><i class="fa fa-calendar"></i>@DateTime.Today.Date</li>
+                                <li><i class="fa fa-tag"></i> <a href="#">News</a></li>
+
+                            </ul>
+
+                            <p>
+                                Marked knobs emphasize other parts of the face like the eyes, the mouth, renovate the face and give a different aspect has your smile, allow maintains it muscles of the face and prevent the appearance of premature wrinkles. The surgical novel methods enable us in full safety to increase the volume of the knobs thanks to the installation of implants or facial prostheses.
+                                This intervention is seldom made in an isolated way, it is often associated with a rhinoplasty, a surgery of the chin or a facelift.
+                                The surgery lasts 1 hour. In post operational, the patient will be able to have certain difficulties, has to open the mouth, the food must be semi liquid and liquid during 4 days; hématomes and an ignition on the level of the treated zone which disappear at the end of 15 days.
+                            </p>
+
+                            <div class="fb-comments" data-href="http://localhost:53656/Blog/Blog" data-numposts="10"></div>
+                        </div>
+
+                    </article>
+                    <article class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@Url.Content("~/Content/template/")img/int.jpg" class="img-responsive center-block img-padder" alt="Medical Theme Health and Care">
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <h4>
+                                <a href="#">
+                                    Female Intimate Surgery
+                                </a>
+                            </h4>
+                            <ul class="list-inline info">
+
+                                <li><i class="fa fa-calendar"></i>@DateTime.Today.Date</li>
+                                <li><i class="fa fa-tag"></i> <a href="#">News</a></li>
+
+                            </ul>
+
+                            <p>
+                                Reduction of The Small Lips
+
+                                Small hypertrophied, asymmetrical or injured lips (after childbirth) can affected psychologically of many women so much in their daily life (sport, wearing of tight clothing) that in the sexual life.
+                                The cosmetic surgery makes it possible to cure these anomalies.
+                                The intervention
+                                The plastic surgeon makes it possible to decrease the hypertrophy of the lips, to correct asymmetries or of the lesions after childbirth; the correction must preserve the contour of these small lips from which the function consists in protecting the vagina.
+                                The intervention requires an anaesthesia locorégional or general.
+                                Risks
+                            </p>
+
+                            <div class="fb-comments" data-href="http://localhost:53656/Blog/Blog" data-numposts="10"></div>
+                        </div>
+
+                    </article>
+                    <article class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@Url.Content("~/Content/template/")img/th.jpg" class="img-responsive center-block img-padder" alt="Medical Theme Health and Care">
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <h4>
+                                <a href="#">
+                                    Thalassotherapy
+                                </a>
+                            </h4>
+                            <ul class="list-inline info">
+
+                                <li><i class="fa fa-calendar"></i>@DateTime.Today.Date</li>
+                                <li><i class="fa fa-tag"></i> <a href="#">News</a></li>
+
+                            </ul>
+
+                            <p>
+                                Tunisia is the second world destination of thalassotherapy with 30 centers integrated into hotels of standing.
+                                Thalassotherapy is the combined use, under medical supervision, with a preventive and curative aim, benefits of the seamen circle which includes/understands, the marine climate, the sea water, muds marine, the algae, sands and other substances extracted the sea.
+                            </p>
+
+                            <div class="fb-comments" data-href="http://localhost:53656/Blog/Blog" data-numposts="10"></div>
+                        </div>
+
+                    </article>
+                    <article class="row">
+
+                        <div class="col-md-4 col-sm-4">
+                            <img src="@Url.Content("~/Content/template/")img/dents.jpg" class="img-responsive center-block img-padder" alt="Medical Theme Health and Care">
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <h4>
+                                <a href="#">
+                                    Dental Surgery
+                                </a>
+                            </h4>
+                            <ul class="list-inline info">
+
+                                <li><i class="fa fa-calendar"></i>@DateTime.Today.Date</li>
+                                <li><i class="fa fa-tag"></i> <a href="#">News</a></li>
+
+                            </ul>
+
+                            <p>
+                                An implant is an artificial root out of titanium which is fixed in the bone, which emerging from the gum will support a prosthetic tooth.
+                                Thanks to the implants, a fixed prosthesis is then produced and the patient profits from a better comfort, of better a masticatoire effectiveness, better an elocution and better an esthetics.
+                            </p>
+
+                            <div class="fb-comments" data-href="http://localhost:53656/Blog/Blog" data-numposts="10"></div>
+                        </div>
+
+                    </article>
+
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">&gt;&gt;</a></li>
+                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&gt;&gt;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>  <!-- end of archive -->
+            </main>
+
+
+        </div>  <!-- end of row -->
+    </div>  <!-- end of container -->
+</section>
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="text-center contact">
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Facebook" class="facebook"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Twitter" class="twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Google +" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Instagram" class="instagram"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Share in Pinterest" class="pinterest"><i class="fa fa-pinterest"></i></a>
+                    </li>
+                    <li class="socials-icons">
+                        <a href="#" data-toggle="tooltip" title="Connect with Skype" class="skype"><i class="fa fa-skype"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; TTMA Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/wow.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+
+<script>
+    new WOW().init();
+</script>
+</body>
+</html>
+
+

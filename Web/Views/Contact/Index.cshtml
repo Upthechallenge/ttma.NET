@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Our doctors", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Index", "InsuranceOffer")</li>
+
+                    <li>@Html.ActionLink("Events", "Indexfront", "Event")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Hotels", "IndexFront", "Hotel")</li>
+
+                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+
+                    <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="starting">
+    <div class="starting-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="team-button">
+                    <div class="col-md-12">
+                        <h1 class="main-title wow animated fadeInLeft">Contact us</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="job">
+    <div class="job-wrapper">
+        <div class="container">
+            <div class="row">
+                @*cont*@
+
+                <section class="contact-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="google-map">
+                                    <div id="map-canvas"></div>
+                                </div>
+                                <div class="quick-contact">
+                                    <h3>Quick Contact</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>
+                                                <i class="fa fa-home"></i>
+                                                <span>Full Address:</span>
+                                                TTMA ARIANA 8080
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>
+                                                <i class="fa fa-phone"></i>
+                                                <span>Cell No:</span>
+                                                +216 22207556
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p>
+                                                <i class="fa fa-fax"></i>
+                                                <span>Fax No:</span>
+                                                +216 22207556
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>
+                                                <i class="fa fa-ambulance"></i>
+                                                <span>Ambulance:</span>
+                                                +216 22207556
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="appointment">
+
+                                    <div class="header text-center">
+                                        <h2>Make an Appointment</h2>
+                                        <a href="#" class="number">
+                                            <i class="fa fa-phone fa-fw"></i>
+                                            +216 22207556
+                                        </a>
+                                        <span class="or">OR</span>
+                                    </div>
+                                    <!-- form of appointment -->
+                                    <div class="row">
+                                        <form method="post" action="#">
+                                            <div class="form">
+                                                <div class="input-group margin-bottom-sm col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                    <input class="form-control" type="text" placeholder="Full Name *" required>
+                                                </div>
+                                                <div class="input-group margin-bottom-sm col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                    <input class="form-control" type="text" placeholder="Email Address *" required>
+                                                </div>
+                                                <div class="input-group margin-bottom-sm col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                    <input class="form-control" type="text" placeholder="Appointment Date *" required>
+                                                </div>
+                                                <div class="input-group margin-bottom-sm col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                    <input class="form-control" type="text" placeholder="Mobile Number *" required>
+                                                </div>
+                                            </div>
+                                            <div class="input-group margin-bottom-sm col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                <textarea class="form-control" rows="6" placeholder="Your Problem *" required></textarea>
+                                            </div>
+                                            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                                                <div class="captcha-container">
+                                                    <label>Are you human? </label><br />
+                                                    <img src="http://inspirythemesdemo.com/healthpress/wp-content/themes/healthpress-theme/captcha/captcha.php" alt="">
+                                                    <input type="text" class="captcha required" name="captcha" maxlength="5" title=" Please enter the code characters displayed in image!">
+                                                </div>
+                                                <input class="btn btn-primary send" type="submit" value="Send">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- end of form -->
+                                </div><!-- end of appointment-->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                @*cont*@
+
+            </div>
+
+        </div>
+</section>
+
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; TTMA Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function initialize() {
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+            center: new google.maps.LatLng(36.8992874, 10.1896009),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script>
+    new WOW().init();
+</script>

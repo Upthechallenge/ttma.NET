@@ -1,0 +1,43 @@
+﻿
+@using System.Web.Mvc.Html;
+
+@using Jmelosegui.Mvc.GoogleMap;
+@using System.Drawing;
+@{
+    ViewBag.Title = "Hotel position";
+    Layout = "~/Views/Shared/Marker.cshtml";
+}
+
+@{
+    Html.GoogleMap()
+        .Name("map")
+        .Height(300)
+        .Center(c => c.Latitude(@ViewBag.lat)
+                         .Longitude(@ViewBag.lon)
+
+                      )
+        .FitToMarkersBounds(true)
+
+
+
+
+        .Markers(m =>
+        {
+            m.Add().Title("Hello World!")
+          
+          ;
+          
+
+
+
+
+        }).Render();
+
+
+
+}
+
+
+
+
+

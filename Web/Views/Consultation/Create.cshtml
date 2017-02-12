@@ -1,0 +1,264 @@
+﻿@model domain.Entities.demandeconsultationenligne
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Our doctors", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Index", "InsuranceOffer")</li>
+
+                    <li>@Html.ActionLink("Events", "Indexfront", "Event")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Hotels", "IndexFront", "Hotel")</li>
+
+                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+
+                    <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="starting">
+    <div class="starting-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="team-button">
+                    <div class="col-md-12">
+                        <h1 class="main-title wow animated fadeInLeft">Online Consultations</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <h2 class="sub-title wow animated flipInX" data-wow-delay="1s">Meet With Our Team</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p>
+    <section id="job">
+        <div class="job-wrapper" style="
+    height: 802px;
+">
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2 text-center button-group" id="filters">
+
+                    <button type="button" class="gallery-btn btn-primary btn" data-filter=".pharmacy" onClick="myFunction()">Verify doctor disponibility</button><button type="button" class="gallery-btn btn-primary btn" data-filter=".care" onClick="    popup2()">Chat with your doctor</button>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        @*ici le code*@
+
+
+                        @using (Html.BeginForm())
+                        {
+                            @*@Html.AntiForgeryToken()*@
+
+                            <div class="form-horizontal">
+                                <h4>Consultation Request</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="control-label col-md-2">@Html.DisplayName("Date :")</div>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.dateAppointement, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Today.Date } })
+                                        @Html.ValidationMessageFor(model => model.dateAppointement, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-2">@Html.DisplayName("Doctor:")</div>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.doctor_name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.doctor_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-2">@Html.DisplayName("Your_Name:")</div>
+                                    <div class="col-md-10">
+
+                                        @Html.EditorFor(model => model.patient_Name, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.GetUserName() } })
+
+                                        @Html.ValidationMessageFor(model => model.patient_Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Validate Request" class="btn btn-default" onclick="Message()" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @*docrtor disp*@
+
+
+
+                    @*fin doctor disp*@
+                    @*fin code*@
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="block-image background-scale">
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; TTMA Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function popup() {
+        width = 400;
+        height = 400;
+        if (window.innerWidth) {
+            var left = (window.innerWidth - width) / 20;
+            var top = (window.innerHeight - height) / 20;
+        }
+        else {
+            var left = (document.body.clientWidth - width) / 0;
+            var top = (document.body.clientHeight - height) / 0;
+        }
+        window.open('dispo', 'nom_de_ma_popup', 'menubar=no, scrollbars=no, top=' + top + ', left=' + left + ', width=' + width + ', height=' + height + '');
+    };
+
+
+
+
+
+
+    function popup2() {
+        width = 400;
+        height = 400;
+        if (window.innerWidth) {
+            var left = (window.innerWidth - width) / 0;
+            var top = (window.innerHeight - height) / 0;
+        }
+        else {
+            var left = (document.body.clientWidth - width) / 0;
+            var top = (document.body.clientHeight - height) / 0;
+        }
+        window.open('chat', 'nom_de_ma_popup', 'menubar=no, scrollbars=no, top=' + top + ', left=' + left + ', width=' + width + ', height=' + height + '');
+    };
+</script>
+
+<script>
+
+    var today = new Date();
+    document.getElementById('time').innerHTML = today;
+</script>
+
+
+<script language=javascript>
+    function Message() {
+        alert("we received your request");
+    }
+</script>
+
+<script>
+    function myFunction() {
+        height = 5;
+        width = 5;
+        t = window.innerHeight - height
+        l = window.innerWidth - width
+
+        window.open('chat', '', 'height=' + height + ', width=' + width + ', left=' + l + ', top=' + t);
+
+    }
+</script>

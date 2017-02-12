@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "validate";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+@using (Html.BeginForm("ValidateCommand", "PayPal"))
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    product Name:
+                </td>
+                <td>
+                    <input type="text" name="product" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Total Price:
+                </td>
+                <td>
+                    <input type="text" name="totalPrice" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="btnConfirm" value="Check out with paypal" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}

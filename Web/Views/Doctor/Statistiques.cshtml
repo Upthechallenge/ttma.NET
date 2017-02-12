@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Statistiques";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<h2>Statistiques</h2>
+
+
+@{
+    var myChart = new Chart(width: 900, height: 600)
+        .AddTitle("statistics of packs components")
+        .AddSeries(
+            name: "Employee",
+            xValue: new[] { "confirmed packs", "hotels", "clinics", "insurance offers" },
+            yValues: new[] { @ViewBag.nbpacks, @ViewBag.nbhotels, @ViewBag.nbclinics, @ViewBag.nboffers })
+        .Write();
+
+}

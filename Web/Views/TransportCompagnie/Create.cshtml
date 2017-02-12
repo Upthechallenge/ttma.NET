@@ -1,0 +1,176 @@
+﻿@model domain.Entities.transportcompagnie
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    TTMA Management
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>@Html.ActionLink("Home", "IndexBack", "Home")</li>
+                    <li>@Html.ActionLink("Staff", "IndexBack", "Staff")</li>
+                    <li>@Html.ActionLink("Doctors", "IndexBack", "Doctor")</li>
+                    <li>@Html.ActionLink("Consultations", "IndexBack", "Consultation")</li>
+                    <li>@Html.ActionLink("Offers", "IndexBack", "Offer")</li>
+                    <li>@Html.ActionLink("Events", "IndexBack", "Event")</li>
+                    <li>@Html.ActionLink("Leave", "IndexBack", "conge")</li>
+                    <li>@Html.ActionLink("Time Table", "IndexBack", "Timetable")</li>
+                    <li>@Html.ActionLink("Hotels", "IndexBack", "Hotel")</li>
+                    <li>@Html.ActionLink("Insurance", "IndexBack", "Insurance")</li>
+                    <li>@Html.ActionLink("Logout", "IndexBack", "Logout")</li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="job">
+    <div class="job-wrapper" style="
+    height: 802px;
+">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2>Add Transport Compagnies</h2>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>transportcompagnie</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @*<div class="form-group">
+                                @Html.LabelFor(model => model.companyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.companyId, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.companyAdress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.companyAdress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyAdress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            @*bbb*
+
+                            <select id="Select1">
+                               
+                                    <option value="companyCategory">Volvo</option>
+                                    <option value="companyCategory">Saab</option>
+                                    <option value="companyCategory">Opel</option>
+                                    
+                             </select>
+
+                            bbb*@
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.companyCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select>
+                                        <option>momo</option>
+                                        <option>popo</option>
+                                    </select>
+                                    @Html.EditorFor(model => model.companyCategory, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyCategory, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.companyCost, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.companyCost, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyCost, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.companyResponsable, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.companyResponsable, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.companyResponsable, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="block-image background-scale">
+                        <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; TTMA Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

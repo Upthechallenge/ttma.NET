@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "")
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Our doctors", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Index", "InsuranceOffer")</li>
+
+                    <li>@Html.ActionLink("Events", "Indexfront", "Event")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Hotels", "IndexFront", "Hotel")</li>
+
+                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+
+                    <li>@Html.ActionLink("Abous Us", "Index", "About")</li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="starting">
+    <div class="starting-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="team-button">
+                    <div class="col-md-12">
+                        <h1 class="main-title wow animated fadeInLeft">About us</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p>
+    <section id="job">
+        <div class="job-wrapper" style="
+    height: 802px;
+">
+            <div class="container">
+
+
+
+
+                <h1>About us</h1>
+<p><strong>T.T.M.A</strong> is a structure founded and directed by experienced doctors, ready to advise you, direct you, to deal with you and to assist you, during and after your medical stay.</p>
+<p><strong>T.T.M.A</strong> represents a network of experts in all the medical and surgical specialities, entirely dedicated to your health and your beauty.</p>
+<h2>Our Engagements</h2>
+<ul>
+    <li>honest, clear and transparent information; </li>
+    <li> to offer you a world network of notoriety composed experts, specialists and private clinics ultramodern and in conformity with the European standards; </li>
+    <li>we propose to you, according to your request for care and your medical file, the expert and the adequate medical infrastructure; </li>
+    <li>a continuous service of assistance in order to guarantee the success of your medical and tourist stay in Tunisia; </li>
+    <li>preferential rates some is the formula of your stay; </li>
+    <li>a close cooperation and organization without fault with our various partners.</li>
+</ul>
+   </p>
+<p>Our Force: our professionalism, our knowledge pointed of the medical environment enables us to offer you the best quality of care to the best price.</p>
+<p>OUR PRIORITY IS YOUR HEALTH WITHOUT COMPROMISE</p>
+<p>
+    The team <strong>T.T.M.A</strong> is made up :
+    <ul>
+        <li>of two doctors coordinators exerting in the private medical field since about fifteen years;</li>
+        <li>Mrs. x: person in charge of the organization;</li>
+        <li>Mrs. y: person in charge of reception and accompaniment.</li>
+    </ul>
+<p>Our team usually speaks: French, English, Italian and Spanish.</p>
+   </div>
+
+
+           </div></div></section>

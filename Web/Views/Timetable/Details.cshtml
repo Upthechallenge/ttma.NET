@@ -1,0 +1,276 @@
+﻿@model domain.Entities.timetable
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+<section class="navs">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="#">
+                    <span><i class="fa fa-stethoscope"></i></span>
+                    T.T.M.A
+                </a>
+            </div>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Authentification", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    //  @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Authentification", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Authentification", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Medical cares <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Doctor", "Index", "Doctor")</li>
+                            <li> @Html.ActionLink("Online Consultation", "Create", "Consultation")</li>
+                            <li>@Html.ActionLink("Quiz", "Quizz", "Quizz")</li>
+
+                        </ul>
+                    </li>
+
+                    <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
+                    <li>@Html.ActionLink("Insurance", "Insurance", "Insurance")</li>
+
+                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Blog")</li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Transport<b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Trasport compagnies", "Index", "TransportCompagnie")</li>
+                            <li> @Html.ActionLink("Get location", "Index", "Demande")</li>
+
+
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Staff Space <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("Leave request", "Create", "Conge")</li>
+                            <li> @Html.ActionLink("My timetable", "Index", "Timetable")</li>
+                            <li> @Html.ActionLink("Backend space", "IndexBack", "Home")</li>
+
+
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </div><!-- navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</section>
+<section id="starting">
+    <div class="starting-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="team-button">
+                    <div class="col-md-12">
+                        <h1 class="main-title wow animated fadeInLeft">My timetable</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p>
+    <section id="container>
+        
+           
+                <div class="row">
+                    <div>
+                        @*ici le code*@
+                        @***calnder**@
+                        <style>
+                            /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+                            /* =========
+                            Get Fonts */
+
+                            /* ================
+                            Assign Variables */
+                            /* ===========================
+                            Setup Mixins/Helper Classes */
+                            .clearfix:after, .calendar ol:after {
+                                content: ".";
+                                display: block;
+                                height: 0;
+                                clear: both;
+                                visibility: hidden;
+                            }
+
+                            /* ==========
+                            Setup Page */
+                            *, *:before, *:after {
+                                box-sizing: border-box;
+                            }
+
+                            body {
+                                padding: 3em;
+                                color: grey;
+                                font-family: 'Quicksand', sans-serif;
+                            }
+
+                            /* ================
+                            Calendar Styling */
+                            .calendar {
+                                background: white;
+                                padding: 3em;
+                                border-radius: 10px;
+                            }
+
+                                .calendar .month {
+                                    margin-top: 0;
+                                    font-weight: normal;
+                                    font-size: 3em;
+                                    color: #6EB590;
+                                }
+
+                                .calendar ol {
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+
+                                    .calendar ol li {
+                                        float: left;
+                                        width: 14.28571%;
+                                    }
+
+                                .calendar .day-names {
+                                    border-bottom: 1px solid #eee;
+                                }
+
+                                    .calendar .day-names li {
+                                        text-transform: uppercase;
+                                        margin-bottom: .5em;
+                                    }
+
+                                .calendar .days li {
+                                    border-bottom: 1px solid #eee;
+                                    min-height: 8em;
+                                }
+
+                                    .calendar .days li .date {
+                                        margin: .5em 0;
+                                    }
+
+                                    .calendar .days li .event {
+                                        background: #6EB590;
+                                        font-size: .75em;
+                                        padding: 0 .75em;
+                                        line-height: 2em;
+                                        color: white;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        border-radius: 1em;
+                                        margin-bottom: 1px;
+                                    }
+
+                                        .calendar .days li .event.span-2 {
+                                            width: 200%;
+                                        }
+
+                                        .calendar .days li .event.begin {
+                                            border-radius: 1em 0 0 1em;
+                                        }
+
+                                        .calendar .days li .event.end {
+                                            border-radius: 0 1em 1em 0;
+                                        }
+
+                                        .calendar .days li .event.all-day {
+                                            background: #9987B5;
+                                        }
+
+                                        .calendar .days li .event.clear {
+                                            background: none;
+                                        }
+
+                                    .calendar .days li:nth-child(n+29) {
+                                        border-bottom: none;
+                                    }
+
+                                    .calendar .days li.outside .date {
+                                        color: #ddd;
+                                    }
+                        </style>
+
+                        <script src="js/prefixfree.min.js"></script>
+
+                        </head>
+
+                        <body>
+                            <div class="calendar">
+                                <h1 class="month">Staff: @Html.DisplayFor(model => model.typeU)</h1>
+                                <ol class="day-names">
+
+                                    <li>Monday</li>
+                                    <li>Tuesday</li>
+                                    <li>Wednesday</li>
+                                    <li>Thursday</li>
+                                    <li>Friday</li>
+                                    <li>Saturday</li>
+                                    <li>Sunday</li>
+                                </ol><ol class="days"><li><div class="date"><div class="event">@Html.DisplayFor(model => model.monday)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.tuesday)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.wednesday)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.thursday)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.friday)</div></div></li><li><div class="date"></div></li><li><div class="date"></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.monday1)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.tuesday1)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.wednesday1)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.thursday1)</div></div></li><li><div class="date"><div class="event">@Html.DisplayFor(model => model.friday1)</div></div></li><li><div class="date"></div></li></ol>
+                            </div>
+
+
+
+
+
+                        </body>
+
+                        @*fin calnder*@
+                        <a href="@Url.Action("ExportPDF","Timetable")"> Export Timetable on PDF </a>
+
+                        @*fin code*@
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="block-image background-scale">
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

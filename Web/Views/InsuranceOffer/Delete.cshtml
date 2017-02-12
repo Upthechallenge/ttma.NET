@@ -1,0 +1,147 @@
+﻿@model domain.Entities.insurance_offer
+
+@{
+    ViewBag.Title = "Delete";
+
+    Layout = "~/Views/Shared/_template.cshtml";
+}
+
+
+
+
+    @*Backoffice   Insurance Offer Crud/Delete *@
+
+    <section class="navs">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand logo" href="#">
+                        <span><i class="fa fa-stethoscope"></i></span>
+                        TTMA Management
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>@Html.ActionLink("Home", "IndexBack", "Home")</li>
+                        <li>@Html.ActionLink("Staff", "Index", "InsuranceAgent")</li>
+                        <li>@Html.ActionLink("Doctors", "IndexBack", "Doctor")</li>
+                        <li>@Html.ActionLink("Consultations", "IndexBack", "Consultation")</li>
+                        <li>@Html.ActionLink("Offers", "IndexBack", "Offer")</li>
+                        <li>@Html.ActionLink("Events", "IndexBack", "Event")</li>
+                        <li>@Html.ActionLink("Leave", "IndexBack", "conge")</li>
+                        <li>@Html.ActionLink("Time Table", "IndexBack", "Timetable")</li>
+                        <li>@Html.ActionLink("Hotels", "IndexBack", "Hotel")</li>
+                        <li>@Html.ActionLink("Insurance", "Create", "InsuranceOffer")</li>
+                        <li>@Html.ActionLink("Logout", "IndexBack", "Logout")</li>
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </section>
+@section cont{
+    <section class="blog-title text-center">
+        <div class="blog-wrapper">
+            <div class="container">
+                <div class="row">
+                    <h1 class="headline">Packs</h1>
+                </div>
+                <div class="row">
+                    <div class="sub-headline">
+                        <p>Different Packs are available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-content">
+        <div class="container">
+            <div class="row">
+
+
+                <h3>Are you sure you want to delete this?</h3>
+                <div>
+                    <h4>insurance_offer</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.id_insurance)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.id_insurance)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.price)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.price)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.insurer_id_user)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.insurer_id_user)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+
+
+
+            </div>  <!-- end of row -->
+        </div>  <!-- end of container -->
+    </section>
+
+}
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copy-right-text text-center">
+                    &copy; Copyright 2015
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
