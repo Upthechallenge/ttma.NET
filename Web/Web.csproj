@@ -249,11 +249,9 @@
     <Compile Include="Controllers\InsuranceAgentController.cs" />
     <Compile Include="Controllers\InsuranceOfferController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NewSendMailerrController.cs" />
     <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
-    <Compile Include="Controllers\NewSendMailerController.cs" />
     <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\QuizzController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
