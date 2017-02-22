@@ -249,6 +249,7 @@
     <Compile Include="Controllers\InsuranceAgentController.cs" />
     <Compile Include="Controllers\InsuranceOfferController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewSendMailerController.cs" />
     <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
@@ -442,7 +443,6 @@
     <Content Include="Views\InsuranceOffer\Edit.cshtml" />
     <Content Include="Views\InsuranceOffer\Index.cshtml" />
     <Content Include="Views\InsuranceOffer\Indexbackoffice.cshtml" />
-    <Content Include="Views\NewSendMailerr\Indexx.cshtml" />
     <Content Include="Views\InsuranceOffer\Create.cshtml" />
     <Content Include="Views\Shared\databidroom.cshtml" />
     <Content Include="Views\Shared\draggable.cshtml" />
